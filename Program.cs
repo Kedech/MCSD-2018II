@@ -9,6 +9,7 @@ namespace WebServerProj
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Options.Root);
             Console.WriteLine("Servidor Web pequeño");
             Server.Start();
             Console.WriteLine("Se termino de cargar");

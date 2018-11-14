@@ -97,6 +97,10 @@ namespace WebServerProj
             var requestInfo = $@"{context.Request.RemoteEndPoint}-{context.Request.HttpMethod}-{context.Request.Url.AbsoluteUri}";
             Logger.Log(requestInfo, context.Request.InputStream);
 
+
+            // Como retornar archivos del servidor
+            // Configurar una carpeta donde buscar archivos -> Appsettings.json
+            // Analizar el URL para hacer match con los archivos de la carpeta
             string response = @"
             <html>
                 <head> <title>Basic Web Server</title> </head>
