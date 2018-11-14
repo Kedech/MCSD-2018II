@@ -9,7 +9,9 @@ namespace WebServerProj
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Options.Root);
+            FileManager m = new FileManager(Options.Root);
+            m.GetAllFiles();
+            
             Console.WriteLine("Servidor Web pequeño");
             Server.Start();
             Console.WriteLine("Se termino de cargar");

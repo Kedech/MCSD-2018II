@@ -101,17 +101,39 @@ namespace WebServerProj
             // Como retornar archivos del servidor
             // Configurar una carpeta donde buscar archivos -> Appsettings.json
             // Analizar el URL para hacer match con los archivos de la carpeta
-            string response = @"
-            <html>
-                <head> <title>Basic Web Server</title> </head>
-                <body> 
-                    <h1> Hola Clase</h1>
-                    <h5> Emocionence </h5>
-                </body>
-            </html>
-            ";
-            byte[] encodedMessage = Encoding.UTF8.GetBytes(response);
-            context.Response.ContentLength64 = encodedMessage.Length;
+            byte[] encodedMessage = new byte[0];
+
+            Console.WriteLine($"LocalPath:{context.Request.Url.LocalPath}");
+
+            if (context.Request.Url.LocalPath == "/")
+            {
+                var fileManager = new FileManager(Options.Root);
+
+                List<string> files = fileManager.GetAllFiles();
+
+                ICustomBuilder indexPageBuilder = new IndexPageBuilder();
+                string response = indexPageBuilder.Build(files);
+
+                encodedMessage = Encoding.UTF8.GetBytes(response);
+                context.Response.ContentLength64 = encodedMessage.Length;
+            }
+            else
+            {
+                try
+                {
+                    var fileManager = new FileManager(Options.Root);
+                    // Devuelve el archivo del disco duro.
+                    encodedMessage = fileManager.GetFileByName(context.Request.Url.LocalPath);
+                    context.Response.ContentLength64 = encodedMessage.Length;
+                }
+                catch
+                {
+                    // Lanzar error 404
+                }
+            }
+
+            // TODO: Actividad.
+            // Hacer un Metodo estatico que Recibe el Context y datos, y Devuelve el context con un Response
             await context.Response.OutputStream.WriteAsync(encodedMessage, 0, encodedMessage.Length);
             context.Response.OutputStream.Close();
         }
