@@ -9,12 +9,17 @@ using System.Linq;
 
 namespace WebServerProj
 {
+    /// TODO: Clase 5 - Actividad 3: Enlazar en server eventos
+    /// Que Program.cs controla, y conoce cuando se recibe un Request Message.
+    
     public static class Server
     {
         //private static HttpListener listener;
 
         // Numero maximo de conexiones concurrentes
         public static int maxSimultaneousConnections = 20;
+
+        // 
 
         // Semaforo es una clase que se encarga de limitar accesso concurrentes.
         private static Semaphore sem = new Semaphore(maxSimultaneousConnections, maxSimultaneousConnections);
@@ -91,77 +96,29 @@ namespace WebServerProj
 
             // El semaforo termina. Y permite que otro Listener pueda empezar.
             sem.Release();
+            byte[] encodedMessage;
+            HttpRequestConverter rc = new HttpRequestConverter();
+            
+            // Subscribe
+            rc.OnRequestHeaderMissing += LogErrorMessage;
+            // unsubscribe
+            //rc.OnRequestHeaderMissing -= LogErrorMessage;
 
-            // Hacer algo con la conexion abierta.
-            // Loguear el Request
-            var requestInfo = $@"{context.Request.RemoteEndPoint}-{context.Request.HttpMethod}-{context.Request.Url.AbsoluteUri}";
-            Logger.Log(requestInfo, context.Request.InputStream);
+            rc.OnRequestHeaderMissing += (obj, arg) => { Console.WriteLine("Lambda Function," + arg.ErrorMessage); };
+            encodedMessage = rc.AnalyzeRequest(context.Request);
 
-            List<IHttpHeaderEvaluator> listOfEvaluators = new List<IHttpHeaderEvaluator>(){
-                new AcceptEvaluator(),
-                new StudentEvaluator(),
-                new AcceptDatetimeEvaluator(),
-            };
+            // TODO: Actividad.
+            // Hacer un Metodo estatico que Recibe el Context y datos, y Devuelve el context con un Response
+            await context.Response.OutputStream.WriteAsync(encodedMessage, 0, encodedMessage.Length);
+            context.Response.OutputStream.Close();
+        }
 
-
-            // Como retornar archivos del servidor
-            // Configurar una carpeta donde buscar archivos -> Appsettings.json
-            // Analizar el URL para hacer match con los archivos de la carpeta
-            byte[] encodedMessage = new byte[0];
-
-            // Devuelve un mensaje de error del servidor web
-            // Si los headers fallan al evaluar
-            try
-            {
-                foreach (var evaluator in listOfEvaluators)
-                {
-                    evaluator.Evaluate(context.Request.Headers);
-                }
-                Console.WriteLine($"LocalPath:{context.Request.Url.LocalPath}");
-
-                if (context.Request.Url.LocalPath == "/")
-                {
-                    var fileManager = new FileManager(Options.Root);
-
-                    List<string> files = fileManager.GetAllFiles();
-
-                    ICustomBuilder indexPageBuilder = new IndexPageBuilder();
-                    string response = indexPageBuilder.Build(files);
-
-                    encodedMessage = Encoding.UTF8.GetBytes(response);
-                    context.Response.ContentLength64 = encodedMessage.Length;
-                }
-                else
-                {
-                    try
-                    {
-                        var fileManager = new FileManager(Options.Root);
-                        // Devuelve el archivo del disco duro.
-                        encodedMessage = fileManager.GetFileByName(context.Request.Url.LocalPath);
-                        context.Response.ContentLength64 = encodedMessage.Length;
-                    }
-                    catch
-                    {
-                        // Lanzar error 404
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                encodedMessage = Encoding.UTF8.GetBytes(ex.Message + Environment.NewLine + ex.StackTrace);
-                context.Response.ContentLength64 = encodedMessage.Length;
-            }
-            finally
-            {
-                // TODO: Actividad.
-                // Hacer un Metodo estatico que Recibe el Context y datos, y Devuelve el context con un Response
-                await context.Response.OutputStream.WriteAsync(encodedMessage, 0, encodedMessage.Length);
-                context.Response.OutputStream.Close();
-            }
+        public static void LogErrorMessage(object obj, CustomArgs args)
+        {
+            Console.WriteLine(args.ErrorMessage);
         }
 
         // Iniciar servidor desde Program.cs
-
         public static void Start()
         {
             List<IPAddress> localhostIPs = GetLocalHostIPs();

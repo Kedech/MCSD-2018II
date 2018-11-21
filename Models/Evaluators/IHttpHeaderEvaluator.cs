@@ -10,10 +10,10 @@ namespace WebServerProj
         bool Evaluate(NameValueCollection headers);
     }
 
-    /// Clase 5 - Actividad 1: Unificar las clases de evaluacion, para usar el mismo metodo base evaluate
+    /// TODO: Clase 5 - Actividad 1: Unificar las clases de evaluacion, para usar el mismo metodo base evaluate
     /// a menos que la clase sea diferente.
     /// Tip: Abstract Class.
-    /// Clase 5 - Actividad 2: 
+    /// TODO: Clase 5 - Actividad 2: 
     /// Generar un tipo propio de Error
     /// Y controlar su excepcion,  y la excepcion general cuando se ejecute el programa.
     public class AcceptEvaluator : IHttpHeaderEvaluator
