@@ -1,0 +1,11 @@
+E:\Lourtec\Clase-Linq\obj\Debug\netcoreapp2.1\Clase-Linq.csprojAssemblyReference.cache
+E:\Lourtec\Clase-Linq\obj\Debug\netcoreapp2.1\Clase-Linq.csproj.CoreCompileInputs.cache
+E:\Lourtec\Clase-Linq\obj\Debug\netcoreapp2.1\Clase-Linq.AssemblyInfoInputs.cache
+E:\Lourtec\Clase-Linq\obj\Debug\netcoreapp2.1\Clase-Linq.AssemblyInfo.cs
+E:\Lourtec\Clase-Linq\bin\Debug\netcoreapp2.1\Clase-Linq.deps.json
+E:\Lourtec\Clase-Linq\bin\Debug\netcoreapp2.1\Clase-Linq.runtimeconfig.json
+E:\Lourtec\Clase-Linq\bin\Debug\netcoreapp2.1\Clase-Linq.runtimeconfig.dev.json
+E:\Lourtec\Clase-Linq\bin\Debug\netcoreapp2.1\Clase-Linq.dll
+E:\Lourtec\Clase-Linq\bin\Debug\netcoreapp2.1\Clase-Linq.pdb
+E:\Lourtec\Clase-Linq\obj\Debug\netcoreapp2.1\Clase-Linq.dll
+E:\Lourtec\Clase-Linq\obj\Debug\netcoreapp2.1\Clase-Linq.pdb
