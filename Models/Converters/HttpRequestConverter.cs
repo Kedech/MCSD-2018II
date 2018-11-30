@@ -23,10 +23,11 @@ namespace WebServerProj
             var requestInfo = $@"{request.RemoteEndPoint}-{request.HttpMethod}-{request.Url.AbsoluteUri}";
             Logger.Log(requestInfo, request.InputStream);
 
+            // TODO: Revisar los Evaluadores de HTTP Headers
             List<IHttpHeaderEvaluator> listOfEvaluators = new List<IHttpHeaderEvaluator>(){
-                new AcceptEvaluator(),
-                new StudentEvaluator(),
-                new AcceptDatetimeEvaluator(),
+                //new AcceptEvaluator(),
+                //new StudentEvaluator(),
+                //new AcceptDatetimeEvaluator(),
             };
 
 
