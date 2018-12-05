@@ -1,0 +1,11 @@
+E:\Lourtec\Reflection\bin\Debug\netcoreapp2.1\Reflection.deps.json
+E:\Lourtec\Reflection\bin\Debug\netcoreapp2.1\Reflection.runtimeconfig.json
+E:\Lourtec\Reflection\bin\Debug\netcoreapp2.1\Reflection.runtimeconfig.dev.json
+E:\Lourtec\Reflection\bin\Debug\netcoreapp2.1\Reflection.dll
+E:\Lourtec\Reflection\bin\Debug\netcoreapp2.1\Reflection.pdb
+E:\Lourtec\Reflection\obj\Debug\netcoreapp2.1\Reflection.csprojAssemblyReference.cache
+E:\Lourtec\Reflection\obj\Debug\netcoreapp2.1\Reflection.csproj.CoreCompileInputs.cache
+E:\Lourtec\Reflection\obj\Debug\netcoreapp2.1\Reflection.AssemblyInfoInputs.cache
+E:\Lourtec\Reflection\obj\Debug\netcoreapp2.1\Reflection.AssemblyInfo.cs
+E:\Lourtec\Reflection\obj\Debug\netcoreapp2.1\Reflection.dll
+E:\Lourtec\Reflection\obj\Debug\netcoreapp2.1\Reflection.pdb

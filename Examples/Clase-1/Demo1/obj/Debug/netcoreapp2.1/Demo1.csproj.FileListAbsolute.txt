@@ -1,0 +1,11 @@
+E:\Lourtec\Clase-1\Demo1\bin\Debug\netcoreapp2.1\Demo1.deps.json
+E:\Lourtec\Clase-1\Demo1\bin\Debug\netcoreapp2.1\Demo1.runtimeconfig.json
+E:\Lourtec\Clase-1\Demo1\bin\Debug\netcoreapp2.1\Demo1.runtimeconfig.dev.json
+E:\Lourtec\Clase-1\Demo1\bin\Debug\netcoreapp2.1\Demo1.dll
+E:\Lourtec\Clase-1\Demo1\bin\Debug\netcoreapp2.1\Demo1.pdb
+E:\Lourtec\Clase-1\Demo1\obj\Debug\netcoreapp2.1\Demo1.csprojAssemblyReference.cache
+E:\Lourtec\Clase-1\Demo1\obj\Debug\netcoreapp2.1\Demo1.csproj.CoreCompileInputs.cache
+E:\Lourtec\Clase-1\Demo1\obj\Debug\netcoreapp2.1\Demo1.AssemblyInfoInputs.cache
+E:\Lourtec\Clase-1\Demo1\obj\Debug\netcoreapp2.1\Demo1.AssemblyInfo.cs
+E:\Lourtec\Clase-1\Demo1\obj\Debug\netcoreapp2.1\Demo1.dll
+E:\Lourtec\Clase-1\Demo1\obj\Debug\netcoreapp2.1\Demo1.pdb

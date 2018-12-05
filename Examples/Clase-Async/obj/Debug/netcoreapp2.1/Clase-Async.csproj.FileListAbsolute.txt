@@ -1,0 +1,11 @@
+E:\Lourtec\Clase-Async\bin\Debug\netcoreapp2.1\Clase-Async.deps.json
+E:\Lourtec\Clase-Async\bin\Debug\netcoreapp2.1\Clase-Async.runtimeconfig.json
+E:\Lourtec\Clase-Async\bin\Debug\netcoreapp2.1\Clase-Async.runtimeconfig.dev.json
+E:\Lourtec\Clase-Async\bin\Debug\netcoreapp2.1\Clase-Async.dll
+E:\Lourtec\Clase-Async\bin\Debug\netcoreapp2.1\Clase-Async.pdb
+E:\Lourtec\Clase-Async\obj\Debug\netcoreapp2.1\Clase-Async.csprojAssemblyReference.cache
+E:\Lourtec\Clase-Async\obj\Debug\netcoreapp2.1\Clase-Async.csproj.CoreCompileInputs.cache
+E:\Lourtec\Clase-Async\obj\Debug\netcoreapp2.1\Clase-Async.AssemblyInfoInputs.cache
+E:\Lourtec\Clase-Async\obj\Debug\netcoreapp2.1\Clase-Async.AssemblyInfo.cs
+E:\Lourtec\Clase-Async\obj\Debug\netcoreapp2.1\Clase-Async.dll
+E:\Lourtec\Clase-Async\obj\Debug\netcoreapp2.1\Clase-Async.pdb
