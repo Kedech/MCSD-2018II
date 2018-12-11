@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net;
+using System.IO;
+using System.Linq;
 
 namespace WebServerProj
 {
@@ -16,7 +19,7 @@ namespace WebServerProj
 
         public event OnError OnRequestHeaderMissing;
 
-        public byte[] AnalyzeRequest(System.Net.HttpListenerRequest request)
+        public byte[] AnalyzeRequest(HttpListenerRequest request)
         {
             // Hacer algo con la conexion abierta.
             // Loguear el Request
@@ -25,9 +28,9 @@ namespace WebServerProj
 
             // TODO: Revisar los Evaluadores de HTTP Headers
             List<IHttpHeaderEvaluator> listOfEvaluators = new List<IHttpHeaderEvaluator>(){
-                //new AcceptEvaluator(),
-                //new StudentEvaluator(),
-                //new AcceptDatetimeEvaluator(),
+                new AcceptEvaluator(),
+                new StudentEvaluator(),
+                new AcceptDatetimeEvaluator(),
             };
 
 
@@ -45,23 +48,25 @@ namespace WebServerProj
                     evaluator.Evaluate(request.Headers);
                 }
 
-                /*
-                foreach (var header in context.Request.Headers)
+                foreach (var header in request.Headers)
                 {
                     HttpHeaderManager.ValidateHeaderName(header.ToString());
-                }
-                */
+                }                
 
                 Console.WriteLine($"LocalPath:{request.Url.LocalPath}");
-
+                
+                ICustomBuilder indexPageBuilder = new IndexPageBuilder();
                 if (request.Url.LocalPath == "/")
                 {
                     var fileManager = new FileManager(Options.Root);
 
                     List<string> files = fileManager.GetAllFiles();
+                    List<string> directories = fileManager.GetAllDirectories();
+                    List<string> all  = new List<string>();
 
-                    ICustomBuilder indexPageBuilder = new IndexPageBuilder();
-                    string response = indexPageBuilder.Build(files);
+                    all = files.Concat(directories).ToList();
+                    
+                    string response = indexPageBuilder.Build(all);
 
                     encodedMessage = Encoding.UTF8.GetBytes(response);
                 }
@@ -73,9 +78,32 @@ namespace WebServerProj
                         // Devuelve el archivo del disco duro.
                         encodedMessage = fileManager.GetFileByName(request.Url.LocalPath);
                     }
-                    catch
+                    catch(FileNotFoundException ex)
                     {
-                        // Lanzar error 404
+                        string msg = ex.FileName;
+                        string responseNotFound = indexPageBuilder.PageNotFound(msg);
+                        encodedMessage = Encoding.UTF8.GetBytes(responseNotFound);
+                        //throw new FileNotFoundException("archivo no encontrado");
+                    }
+                    catch(WebException ex)
+                    {
+                        var response = (HttpWebResponse)ex.Response;
+
+                        switch (response.StatusCode)
+                        {
+                            case HttpStatusCode.NotFound: 
+                                string notfound = "<!DOCTYPE Html><html><head><title>"+response.StatusCode+"</title></head><body><h1>404 </h1> <h2>"+response.StatusDescription+"</h2></body></html>";
+                                encodedMessage = Encoding.UTF8.GetBytes(notfound);
+                                break;
+
+                            case HttpStatusCode.InternalServerError: 
+                                string internalError = "<!DOCTYPE Html><html><head><title>"+response.StatusCode+"</title></head><body><h1>404 </h1> <h2>"+response.StatusDescription+"</h2></body></html>";
+                                encodedMessage = Encoding.UTF8.GetBytes(internalError);
+                                break;
+
+                            default:
+                                throw;
+                        }
                     }
                 }
             }
