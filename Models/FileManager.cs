@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace WebServerProj
 {
@@ -27,6 +28,16 @@ namespace WebServerProj
             // return Directory.GetFileSystemEntries(_basePath).ToList();
         }
 
+        public List<string> GetAllDirectories()
+        {
+            var listDirectories = new List<string>();
+            foreach(var directory in Directory.GetDirectories(_basePath))
+            {
+                listDirectories.Add(Path.GetFileName(directory));
+            }
+            return listDirectories;
+        }
+
         // Recuperar 1 archivo por su nombre
         public byte[] GetFileByName(string fileName)
         {
@@ -48,9 +59,9 @@ namespace WebServerProj
                         sum += count;
                     }
                 }
-                catch
+                catch(FileNotFoundException)
                 {
-                    throw;
+                    throw new FileNotFoundException();
                 }
             }
 

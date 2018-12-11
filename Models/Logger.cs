@@ -18,7 +18,7 @@ namespace WebServerProj
 
         private static void AddLineToLog(string message)
         {
-            using (FileStream fs = File.OpenWrite("E:\\Lourtec\\Log.txt"))
+            using (FileStream fs = File.OpenWrite("C:\\Users\\COMPUTER\\Desktop\\GitHub\\MCSD-2018II\\Log.txt"))
             {
                 using(StreamWriter sw = new StreamWriter(fs))
                 {
@@ -31,7 +31,7 @@ namespace WebServerProj
         {
             var memoryStream = message;
 
-            var fileStream = File.OpenWrite($"E:\\Lourtec\\Log-{DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss")}.txt");
+            var fileStream = File.OpenWrite($"C:\\Users\\COMPUTER\\Desktop\\GitHub\\MCSD-2018II\\Log-{DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss")}.txt");
             memoryStream.CopyTo(fileStream);
             fileStream.Close();
 

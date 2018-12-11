@@ -9,6 +9,7 @@ namespace WebServerProj
 
         public string Build(object data)
         {
+            var html = "";
             if (data.GetType() != typeof(List<string>))
             {
                 throw new Exception("IndexPageBuilder-Error-1: Tipo de datos en instancia no es List<string>()");
@@ -17,7 +18,7 @@ namespace WebServerProj
             List<string> listaArchivos = new List<string>();
             listaArchivos = data as List<string>;
 
-            var html = BodyBeginGenerator() +
+            html = BodyBeginGenerator() +
             BulletListGenerator(listaArchivos) +
             BodyEndGenerator();
             return html;
@@ -47,6 +48,12 @@ namespace WebServerProj
         public string BodyEndGenerator()
         {
             return "</body></html>";
+        }
+
+        public string PageNotFound(object msg)
+        {
+            var html = "<!DOCTYPE Html><html><head><title>Error</title></head><body><h1>File not Found</h1> <h2>"+msg+"</h2>"+BodyEndGenerator();
+            return html;
         }
     }
 }
